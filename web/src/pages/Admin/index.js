@@ -37,7 +37,8 @@ const styles = {
     margin: 2,
     width: '2em',
     height: '2em',
-    pointerEvents: 'none'
+    pointerEvents: 'none',
+    background: 'transparent'
   },
   squareOrange: {
     background: 'orange',
