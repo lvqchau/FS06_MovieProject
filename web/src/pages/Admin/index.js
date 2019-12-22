@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import { withStyles } from "@material-ui/styles";
 
 const styles = {
-  // col: {
-  //   display: 'grid',
-  //   width: '100%',
-  //   gridTemplateRows: `repeat()`
-  // },
   flexContainer: {
     display: "flex",
     flexDirection: "column",
@@ -35,10 +30,10 @@ const styles = {
     outline: "none",
     border: "none",
     margin: 2,
-    width: "2em",
-    height: "2em",
-    pointerEvents: "none",
-    background: "transparent"
+    width: '2em',
+    height: '2em',
+    pointerEvents: 'none',
+    background: 'transparent'
   },
   squareOrange: {
     background: "orange",
