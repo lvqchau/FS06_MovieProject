@@ -23,8 +23,7 @@ const styles = {
   root: {
     maxWidth: '44em',
     minWidth: '28em',
-    border: '2px solid rgba(238,238,238,.88)',
-    borderRadius: 10,
+    border: '1px solid rgba(238,238,238,.88)',
     flexGrow: 1,
     display: 'flex',
     '& .MuiTabs-indicator': {
@@ -32,8 +31,8 @@ const styles = {
     }
   },
   img: {
-    width: 40,
-    height: 40
+    width: '3em',
+    height: '3em'
   },
   panelCine: {
     overflow: 'hidden',
@@ -47,11 +46,14 @@ const styles = {
     }
   },
   tabCinema: {
+    width: '4em',
     position: 'relative',
+    borderRight: '1px solid rgba(238,238,238,.88)',
     '& .MuiTab-root': {
-      paddingBottom: 10,
-      paddingTop: 10,
-      minWidth: 0
+      padding: '10px 1px',
+      minWidth: 0,
+      width: 'fit-content',
+      margin: 'auto'
     },
     '& .MuiTab-textColorInherit': {
       opacity: '0.5',
@@ -68,11 +70,14 @@ const styles = {
     margin: 'auto'
   },
   tabBranch: {
-    maxHeight: 420,
     minHeight: 'none',
-    width: '25em',
+    borderRight: '1px solid rgba(238,238,238,.88)',
+    width: '20em',
     '& .MuiTab-root': {
-      textAlign: 'left'
+      textAlign: 'left',
+      borderBottom: '1px solid rgba(238,238,238,.88)',
+      padding: '6px 2px',
+      margin: '0 10px'
     },
     '& .MuiTab-textColorInherit': {
       opacity: '0.5',
@@ -88,7 +93,7 @@ const styles = {
     }
   },
   branch: {
-    width: '100%',
+    width: '100%'
   },
   branchInfo: {
     marginLeft: 10,
@@ -104,7 +109,7 @@ const styles = {
   },
   branchAdd: {
     textTransform: 'capitalize',
-    fontSize: 8,
+    fontSize: 9,
     margin: 0,
     lineHeight: 1,
     textOverflow: 'ellipsis',
@@ -113,7 +118,7 @@ const styles = {
   },
   link: {
     margin: 0,
-    fontSize: 8,
+    fontSize: 9,
     color: 'red',
     textTransform: 'initial',
   }
@@ -135,7 +140,7 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    const height = textInput.current.getElementsByClassName("MuiTabs-fixed")[0].offsetHeight+70;
+    const height = textInput.current.getElementsByClassName("MuiTabs-fixed")[0].offsetHeight+72;
     setHeight(height+'px');
   },[textInput])
 
@@ -152,33 +157,28 @@ const Home = (props) => {
           label={<Image alt={cinemaData[0].label} 
           src={Cine1} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
-        <div className={classes.borderLine}/>
         <Tab
           label={<Image alt={cinemaData[1].label} 
           src={Cine2} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
-        <div className={classes.borderLine} />
+        
         <Tab
           label={<Image alt={cinemaData[2].label} 
           src={Cine3} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
-        <div className={classes.borderLine} />
         <Tab
           label={<Image alt={cinemaData[3].label} 
           src={Cine4} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
-        <div className={classes.borderLine} />
         <Tab
-          label={<Image alt={cinemaData[4].label} 
-          src={Cine5} className={classes.img} />}
+          label={<Image alt={cinemaData[4].label}
+            src={Cine5} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
-        <div className={classes.borderLine} />
         <Tab
-          label={<Image alt={cinemaData[5].label} 
-          src={Cine6} className={classes.img} />}
+          label={<Image alt={cinemaData[5].label}
+            src={Cine6} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
       </Tabs>
-      
       {
         cinemaData.map((cinema, index) => (
           <TabPanel value={value} key={cinema.label} index={index} className={classes.panelCine} style={{ height: panelHeight}}>
@@ -190,6 +190,7 @@ const Home = (props) => {
               variant="scrollable"
               scrollButtons="off"
               className={classes.tabBranch}
+              style={{ height: panelHeight }}
             >
               {
                 branchData.map((branch, index) => (

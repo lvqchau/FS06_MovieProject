@@ -94,7 +94,7 @@ const branchData = [
   },
   {
     name: 'cgv-paragon18',
-    label: 'cgv-paragon18',
+    label: 'cgv-paragon1',
     img: '../../assets/images/cinema/cgv-vivocity.jpg',
     cinemaLabel: 'cgv'
   },
