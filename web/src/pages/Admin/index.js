@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 import { withStyles } from '@material-ui/styles';
 
 const styles = {
-  // col: {
-  //   display: 'grid',
-  //   width: '100%',
-  //   gridTemplateRows: `repeat()`
-  // },
   flexContainer: {
     display: 'flex',
     flexDirection: 'column',
