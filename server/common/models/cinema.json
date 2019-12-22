@@ -1,0 +1,51 @@
+{
+  "name": "Cinema",
+  "plural": "cinemas",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "branchname": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "number"
+    },
+    "room": {
+      "type": [
+        "object"
+      ],
+      "required": true
+    },
+    "opentime": {
+      "type": "string",
+      "required": true
+    },
+    "info": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "listCinema": {
+      "type": "belongsTo",
+      "model": "ListCinema",
+      "foreignKey": "listcinemaId"
+    },
+    "movies": {
+      "type": "hasMany",
+      "model": "Movie",
+      "foreignKey": "cinemaId",
+      "through": "Showtime"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
