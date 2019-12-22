@@ -1,17 +1,19 @@
-import React from 'react';
-import { withStyles } from '@material-ui/styles';
+import React from "react";
+import { withStyles } from "@material-ui/styles";
+import ImageUpload from "../../components/ImageUpload";
 
 const styles = {
   para: {
-    color: 'red'
+    color: "red"
   }
-}
+};
 
-const AuthScreen = (props) => {
+const AuthScreen = props => {
   const { classes } = props;
   return (
     <div>
-      <p className={classes.para}>Auth</p>
+      {/* <p className={classes.para}>Auth</p> */}
+      <ImageUpload />
     </div>
   );
 };

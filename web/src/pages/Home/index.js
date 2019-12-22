@@ -5,16 +5,11 @@ import AppBar from '@material-ui/core/AppBar';
 import TabPanel from './components/TabPanel';
 import { withStyles } from '@material-ui/styles';
 
-import { cinemaData, branchData } from './dummyData';
-import Image from '../../components/Image';
-import Cine1 from '../../assets/images/cinema/cine1.png';
-import Cine2 from '../../assets/images/cinema/cine2.png';
-import Cine3 from '../../assets/images/cinema/cine3.png';
-import Cine4 from '../../assets/images/cinema/cine4.png';
-import Cine5 from '../../assets/images/cinema/cine5.png';
-import Cine6 from '../../assets/images/cinema/cine6.png';
-import BranchBHD from '../../assets/images/cinema/bhd-star-cineplex-3-2.jpg';
-import { Link } from 'react-router-dom';
+import { cinemaData, branchData } from "./dummyData";
+import Image from "../../components/Image";
+import BranchBHD from "./assets/bhd-star-cineplex-3-2.jpg";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const styles = {
   container: {
@@ -155,28 +150,28 @@ const Home = (props) => {
       >
         <Tab
           label={<Image alt={cinemaData[0].label} 
-          src={Cine1} className={classes.img} />}
+          src={"/cinemas/logos/lt.png"} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
         <Tab
           label={<Image alt={cinemaData[1].label} 
-          src={Cine2} className={classes.img} />}
+          src={"/cinemas/logos/glx.png"} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
         
         <Tab
           label={<Image alt={cinemaData[2].label} 
-          src={Cine3} className={classes.img} />}
+          src={"/cinemas/logos/bhd.png"} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
         <Tab
           label={<Image alt={cinemaData[3].label} 
-          src={Cine4} className={classes.img} />}
+          src={"/cinemas/logos/cns.png"} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
         <Tab
           label={<Image alt={cinemaData[4].label}
-            src={Cine5} className={classes.img} />}
+            src={"/cinemas/logos/cgv.png"} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
         <Tab
           label={<Image alt={cinemaData[5].label}
-            src={Cine6} className={classes.img} />}
+            src={"/cinemas/logos/mgs.png"} className={classes.img} />}
           disableFocusRipple disableTouchRipple />
       </Tabs>
       {

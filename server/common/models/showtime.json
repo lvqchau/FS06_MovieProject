@@ -1,0 +1,51 @@
+{
+  "name": "Showtime",
+  "plural": "showtimes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "room": {
+      "type": "string",
+      "required": true
+    },
+    "time": {
+      "type": [
+        "date"
+      ],
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "seat": {
+      "type": [
+        "object"
+      ],
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "tickets": {
+      "type": "hasMany",
+      "model": "Ticket",
+      "foreignKey": "showtimeId"
+    },
+    "movie": {
+      "type": "belongsTo",
+      "model": "Movie",
+      "foreignKey": "movieId"
+    },
+    "cinema": {
+      "type": "belongsTo",
+      "model": "Cinema",
+      "foreignKey": "cinemaId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
