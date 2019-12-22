@@ -137,7 +137,20 @@ const Home = (props) => {
   useEffect(() => {
     const height = textInput.current.getElementsByClassName("MuiTabs-fixed")[0].offsetHeight+72;
     setHeight(height+'px');
-  },[textInput])
+  }, [textInput])
+  
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:5000/api/list-cinemas"
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className={classes.root}>
