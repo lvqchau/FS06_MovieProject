@@ -2,5 +2,16 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "MovieProject": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "",
+    "database": "Movie",
+    "password": "",
+    "name": "MovieProject",
+    "user": "",
+    "useNewUrlParser": true,
+    "connector": "mongodb"
   }
 }

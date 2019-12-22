@@ -1,0 +1,37 @@
+{
+  "name": "ListCinema",
+  "plural": "list-cinemas",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": false
+    },
+    "logoimg": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "cinemas": {
+      "type": "hasMany",
+      "model": "Cinema",
+      "foreignKey": "listcinemaId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

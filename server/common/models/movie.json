@@ -1,0 +1,61 @@
+{
+  "name": "Movie",
+  "plural": "movies",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "release": {
+      "type": "date",
+      "required": true
+    },
+    "genre": {
+      "type": ["string"],
+      "required": true
+    },
+    "cast": {
+      "type": ["string"],
+      "required": true
+    },
+    "director": {
+      "type": ["string"]
+    },
+    "country": {
+      "type": "string"
+    },
+    "type": {
+      "type": ["string"],
+      "required": true
+    },
+    "detail": {
+      "type": "string",
+      "required": true
+    },
+    "news": {
+      "type": ["object"]
+    },
+    "length": {
+      "type": "number",
+      "required": true
+    },
+    "comment": {
+      "type": ["object"]
+    }
+  },
+  "validations": [],
+  "relations": {
+    "cinemas": {
+      "type": "hasMany",
+      "model": "Cinema",
+      "foreignKey": "movieId",
+      "through": "Showtime"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -34,5 +34,25 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "ListCinema": {
+    "dataSource": "MovieProject",
+    "public": true
+  },
+  "Movie": {
+    "dataSource": "MovieProject",
+    "public": true
+  },
+  "Cinema": {
+    "dataSource": "MovieProject",
+    "public": true
+  },
+  "Showtime": {
+    "dataSource": "MovieProject",
+    "public": true
+  },
+  "Ticket": {
+    "dataSource": "MovieProject",
+    "public": true
   }
 }
