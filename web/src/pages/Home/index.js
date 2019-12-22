@@ -141,6 +141,19 @@ const Home = props => {
     setHeight(height + "px");
   }, [textInput]);
 
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:5000/api/list-cinemas"
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className={classes.root}>
       <Tabs
