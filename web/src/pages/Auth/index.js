@@ -13,7 +13,8 @@ const AuthScreen = props => {
   return (
     <div>
       {/* <p className={classes.para}>Auth</p> */}
-      <ImageUpload />
+      <p>BHD Star Bitexco</p>
+      <button>Detail</button>
     </div>
   );
 };
