@@ -5,29 +5,31 @@ import Image from '../../components/Image';
 
 const styles = {
   container: {
-    // width: '100%',
     height: '100vh',
     overflow: 'hidden',
     position: 'relative'
   },
   navbar: {
-    width: '100%',
-    height: 60,
+    height: '4.5em',
+    display: 'flex',
+    alignItems: 'center',
     background: 'gray',
-    zIndex: 5
+    boxSizing: 'border-box',
+    zIndex: 5,
+    transition: 'width 0.5s ease',
   },
   flexContainer: {
     height: '100%',
     display: 'flex',
   },
   movie: {
-    background: 'aqua',
-    transition: 'all 0.3s ease',
+    transition: 'all 0.5s ease',
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'flex-end'
   },
   viewContainer: {
+    transition: 'all 0.5s ease',
     background: 'salmon',
     width: '65%'
   },
@@ -38,15 +40,18 @@ const styles = {
     top: 0,
     right: 0,
     background: 'darkblue',
-    transition: 'right 0.3s ease'
+    transition: 'visibility 6s, opacity 6s, right 0.5s',
+    '&.active': {
+      transition: 'visibility 0s, opacity 0s, right 0.5s',
+    }
   },
+
   image: {
     width: '35vw'
   }
 };
 
 const Ticket = (props) => {
-  //phải login
   const { classes } = props;
   const [view, setView] = useState(0)
   const [width, setWidth] = useState({
@@ -69,16 +74,20 @@ const Ticket = (props) => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.navbar}>
-        <Button onClick={() => setView(0)}>Choose ticket</Button>
-        <Button onClick={() => setView(1)}>Choose seat</Button>
+      <div className={classes.navbar} style={{ width: `calc(100% - 30% - ${width.seatRight})`}}>
+        <Button onClick={() => setView(0)}>
+          <span className={classes.viewIndex}>01</span>
+          Chọn số lượng vé
+        </Button>
+        <Button onClick={() => setView(1)}>
+          <span className={classes.viewIndex}>02</span>
+          Chọn ghế và thanh toán
+        </Button>
       </div>
       <div className={classes.flexContainer}>
-        {/* contains movie image */}
         <div className={classes.movie} style={{ width: width.movWidth }}>
           <Image src="https://s3img.vcdn.vn/123phim/2019/11/chi-chi-em-em-sister-sister-c18-15747394235000.jpg" className={classes.image}/>
         </div>
-        {/* contains ticket count or contains seat list */}
         {
           view == 0 ?
             <div className={classes.viewContainer}>
@@ -88,16 +97,29 @@ const Ticket = (props) => {
             <div className={classes.viewContainer}>
               <div className={classes.seatList}>SEATTTTTTT LISTTTTTT</div> 
             </div>
-          }
-        {/* contains seat choice view */}
-        <div className={classes.seatChoice} style={{ right: width.seatRight }}>
-          <Button onClick={() => setView(0)}>Choose ticket</Button>
-          <Button onClick={() => setView(0)}>Choose ticket</Button>
-          <Button onClick={() => setView(0)}>Choose ticket</Button>
-          <Button onClick={() => setView(0)}>Choose ticket</Button>
-          <Button onClick={() => setView(0)}>Choose ticket</Button>
-          <Button onClick={() => setView(0)}>Choose ticket</Button>
-        </div>
+        }
+        {
+          view == 0 ?
+            <div className={classes.seatChoice} style={{ right: width.seatRight, opacity: 0, visibility: 'hidden' }}>
+              <Button>Choose ticket</Button>
+              <Button onClick={() => setView(0)}>Choose ticket</Button>
+              <Button onClick={() => setView(0)}>Choose ticket</Button>
+              <Button onClick={() => setView(0)}>Choose ticket</Button>
+              <Button onClick={() => setView(0)}>Choose ticket</Button>
+              {/* <Button onClick={() => setView(0)}>Choose ticket</Button> */}
+              <Button className={classes.order} disabled={true}>Đặt vé</Button>
+            </div>
+            :
+            <div className={`${classes.seatChoice} active`} style={{ right: width.seatRight, opacity: 1, visibility: 'visible' }}>
+              <Button>Choose ticket</Button>
+              <Button onClick={() => setView(0)}>Choose ticket</Button>
+              <Button onClick={() => setView(0)}>Choose ticket</Button>
+              <Button onClick={() => setView(0)}>Choose ticket</Button>
+              <Button onClick={() => setView(0)}>Choose ticket</Button>
+              {/* <Button onClick={() => setView(0)}>Choose ticket</Button> */}
+              <Button className={classes.order} disabled={true}>Đặt vé</Button>
+            </div>
+        }
       </div>
     </div>
   );
