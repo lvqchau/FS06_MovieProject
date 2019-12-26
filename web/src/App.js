@@ -4,21 +4,27 @@ import Home from './pages/Home';
 import Admin from './pages/Admin';
 import Layout from "./layout/Layout";
 import AdminLayout from "./layout/AdminLayout";
+import Ticket from './pages/Ticket';
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path='/seat' exact component={Ticket} />
+        
         <AdminLayout path="/admin">
           <Switch>
             <Route exact path="/admin/cinema" component={Admin} />
+            <Route exact path="/admin/movie" component={Admin} />
           </Switch>
         </AdminLayout>
-        {/* <Layout path="/"> */}
+
+        <Layout path="/">
           <Switch>
             <Route path='/' exact component={Home} />
           </Switch>
-        {/* </Layout> */}
+        </Layout>
+
       </Switch>
     </Router>
   );

@@ -7,16 +7,19 @@ import Divider from "@material-ui/core/Divider";
 import MenuIcon from '@material-ui/icons/Menu';
 import UserIcon from '@material-ui/icons/SupervisedUserCircle';
 import LaptopIcon from '@material-ui/icons/LaptopChromebook';
+import PhotoIcon from '@material-ui/icons/AddAPhoto';
 
 import colors from '../constants/colors';
 import Avatar from './Avatar';
+import { useEffect } from "react";
 
 const styles = theme => ({
   sidebar: {
     width: 'fit-content',
     height: '100vh',
     boxShadow: '1px 0px 10px 0px rgba(0,0,0,0.3)',
-    textAlign: 'center'
+    textAlign: 'center',
+    zIndex: '9999'
   },
   sidebarContent: {
     padding: '10px 16px',
@@ -47,19 +50,20 @@ const styles = theme => ({
     },
     position: 'relative',
     '& .textHide': {
+      fontSize: 11,
       background: 'red',
       height: '100%',
       display: 'flex',
       alignItems: 'center',
       zIndex: '-1',
       left: 0,
-      paddingLeft: '5em',
+      paddingLeft: 50,
       position: 'absolute',
       opacity: 0,
       visibility: 'hidden',
       width: 0,
       margin: 0,
-      transition: 'all 0.4s ease-out'
+      transition: 'width 0.4s ease-out'
     },
     '&:hover': {
       '&.active': {
@@ -68,9 +72,29 @@ const styles = theme => ({
       '& .textHide': {
         opacity: 1,
         visibility: 'visible',
-        width: '180%',
+        width: '200%',
       },
     }
+  },
+  linkFull: {
+    display: "flex",
+    alignItems: "center",
+    textTransform: "uppercase",
+    color: "black",
+    padding: 5,
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "none"
+    },
+    '& .textHide': {
+      margin: 0,
+      fontSize: 13,
+      paddingLeft: 16,
+      visibility: 'visible'
+    },
+    '&.active': {
+      color: 'green',
+    },
   },
   accountContainer: {
     display: 'flex',
@@ -107,45 +131,72 @@ const styles = theme => ({
   },
   hideSidebar: {
     display: 'flex',
-    alignItems: 'center',
-
+    alignItems: 'center'
   }
 })
 
 const Sidebar = props => {
-  const { classes, role, openDrawer } = props;
+  const { classes, location } = props;
   const [activeLink, setActive] = useState(0)
   const [fullWidth, setFull] = useState(false)
+
+  useEffect(() => {
+    switch (props.location.pathname.split('/')[2]) {
+      case 'cinema':
+        setActive(1);
+        break;
+      case 'movie':
+        setActive(2);
+        break;
+      default: break;
+    }
+  },[])
+
   return (
     <div className={classes.sidebar}>
       <MenuIcon className={classes.menuIcon} onClick={() => setFull(!fullWidth)} />
-      <NavLink exact to='/admin' className={classes.link} onClick={() => setActive(0)}>
+      <NavLink exact to='/admin' className={!fullWidth ? classes.link : classes.linkFull} onClick={() => setActive(0)}>
         {
           activeLink === 0
             ?
             <div className={classes.hideSidebar}>
               <UserIcon className={classes.sidebarIconActive} />
-              <p className="textHide" style={{ fontSize: 10 }}>Dashboard</p>
+              <p className="textHide">Dashboard</p>
             </div>
             :
             <div className={classes.hideSidebar}>
               <UserIcon className={classes.sidebarIcon} />
-              <p className="textHide" style={{ fontSize: 10 }}>Dashboard</p>
+              <p className="textHide">Dashboard</p>
             </div>
         }
       </NavLink>
-      <NavLink exact to='/admin/cinema' className={classes.link} onClick={() => setActive(1)}>
+      <NavLink exact to='/admin/cinema' className={!fullWidth ? classes.link : classes.linkFull} onClick={() => setActive(1)}>
         {
           activeLink === 1
             ?
             <div className={classes.hideSidebar}>
               <LaptopIcon className={classes.sidebarIconActive} />
-              <p className="textHide" style={{ fontSize: 10 }}>Cinema</p>
+              <p className="textHide">Cinema</p>
             </div>
             :
             <div className={classes.hideSidebar}>
-              <LaptopIcon className={classes.sidebarIconActive} />
-              <p className="textHide" style={{ fontSize: 10 }}>Cinema</p>
+              <LaptopIcon className={classes.sidebarIcon} />
+              <p className="textHide">Cinema</p>
+            </div>
+        }
+      </NavLink>
+      <NavLink exact to='/admin/movie' className={!fullWidth ? classes.link : classes.linkFull} onClick={() => setActive(2)}>
+        {
+          activeLink === 2
+            ?
+            <div className={classes.hideSidebar}>
+              <PhotoIcon className={classes.sidebarIconActive} />
+              <p className="textHide">Movie</p>
+            </div>
+            :
+            <div className={classes.hideSidebar}>
+              <PhotoIcon className={classes.sidebarIcon} />
+              <p className="textHide">Movie</p>
             </div>
         }
       </NavLink>

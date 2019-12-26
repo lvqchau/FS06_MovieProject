@@ -49,7 +49,7 @@ const AdminLayout = props => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <Sidebar role="admin" />
+      <Sidebar role="admin" {...props}/>
       <Container>{props.children}</Container>
 
     </div>

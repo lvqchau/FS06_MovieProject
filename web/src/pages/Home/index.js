@@ -205,7 +205,7 @@ const Home = (props) => {
                   branch.cinemaLabel === cinema.label &&
                   <Tab label={
                     <div className={classes.branch} style={{display: 'flex', }}>
-                      <Image src={BranchBHD} alt={branch.label} className={classes.img} />
+                      <Image src={BranchBHD} alt={branch.label} className={classes.img} isStatic={true}/>
                       <div className={classes.branchInfo}>
                         <p className={classes.branchName}>
                           <span>{cinema.label}</span> - {branch.name}
