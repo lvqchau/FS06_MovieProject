@@ -49,6 +49,7 @@ const styles = {
       transition: 'visibility 0s, opacity 0s, right 0.4s, box-shadow 0s',
     }
   },
+
   image: {
     width: '35vw'
   },
