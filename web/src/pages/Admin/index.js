@@ -67,7 +67,7 @@ const Admin = props => {
   //active: cho User lựa trên UI
   //idSeat: null => design ghế không có
   const [room, setRoom] = useState([]);
-  const [final, setFinal] = useState({});
+  const [final, setFinal] = useState([]);
   const [curSize, setSize] = useState({ row: 0, col: 0 });
 
   const setActive = (row, chair) => {
@@ -90,24 +90,25 @@ const Admin = props => {
         if (seat.active) {
           let id = "";
           switch (index) {
-            case 0:
-              id = "A";
-              break;
-            case 1:
-              id = "B";
-              break;
-            case 2:
-              id = "C";
-              break;
-            case 3:
-              id = "D";
-              break;
-            case 4:
-              id = "E";
-              break;
-            case 5:
-              id = "F";
-              break;
+            case 0: id = "A"; break;
+            case 1: id = "B"; break;
+            case 2: id = "C"; break;
+            case 3: id = "D"; break;
+            case 4: id = "E"; break;
+            case 5: id = "F"; break;
+            case 6: id = "G"; break;
+            case 7: id = "H"; break;
+            case 8: id = "I"; break;
+            case 9: id = "J"; break;
+            case 10: id = "K"; break;
+            case 11: id = "L"; break;
+            case 12: id = "M"; break;
+            case 13: id = "N"; break;
+            case 14: id = "O"; break;
+            case 15: id = "P"; break;
+            case 16: id = "Q"; break;
+            case 17: id = "R"; break;
+            case 18: id = "S"; break;
             default:
               break;
           }
@@ -188,49 +189,47 @@ const Admin = props => {
         Save
       </button>
       <div className={classes.flexContainer}>
-        {final &&
-          final.finalArr &&
-          final.finalArr.map((item, index) => {
-            return (
-              <div className={classes.row} key={index}>
-                {item.map((chair, index2) => {
-                  if (chair.idSeat === null) {
+        {final && final.finalArr && final.finalArr.map((item, index) => {
+          return (
+            <div className={classes.row} key={index}>
+              {item.map((chair, index2) => {
+                if (chair.idSeat === null) {
+                  return (
+                    <button className={classes.squareNull} key={index2}>
+                      {chair.id}
+                    </button>
+                  );
+                } else {
+                  if (!chair.active) {
                     return (
-                      <button className={classes.squareNull} key={index2}>
+                      <button
+                        className={
+                          chair.available
+                            ? classes.squareOrange
+                            : classes.squareGray
+                        }
+                        key={index2}
+                        onClick={() => setActive2(index, index2)}
+                      >
                         {chair.id}
                       </button>
                     );
                   } else {
-                    if (!chair.active) {
-                      return (
-                        <button
-                          className={
-                            chair.available
-                              ? classes.squareOrange
-                              : classes.squareGray
-                          }
-                          key={index2}
-                          onClick={() => setActive2(index, index2)}
-                        >
-                          {chair.id}
-                        </button>
-                      );
-                    } else {
-                      return (
-                        <button
-                          className={classes.squareActive2}
-                          key={index2}
-                          onClick={() => setActive2(index, index2)}
-                        >
-                          {chair.id}
-                        </button>
-                      );
-                    }
+                    return (
+                      <button
+                        className={classes.squareActive2}
+                        key={index2}
+                        onClick={() => setActive2(index, index2)}
+                      >
+                        {chair.id}
+                      </button>
+                    );
                   }
-                })}
-              </div>
-            );
-          })}
+                }
+              })}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

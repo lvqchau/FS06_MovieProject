@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import AppBar from '@material-ui/core/AppBar';
 import TabPanel from './components/TabPanel';
 import { withStyles } from '@material-ui/styles';
 
@@ -16,8 +15,8 @@ const styles = {
     minWidth: 350
   },
   root: {
-    maxWidth: '44em',
-    minWidth: '28em',
+    maxWidth: '100%',
+    minWidth: '350px',
     border: '1px solid rgba(238,238,238,.88)',
     flexGrow: 1,
     display: 'flex',
@@ -137,82 +136,97 @@ const Home = (props) => {
   useEffect(() => {
     const height = textInput.current.getElementsByClassName("MuiTabs-fixed")[0].offsetHeight+72;
     setHeight(height+'px');
-  },[textInput])
+  }, [textInput])
+  
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:5000/api/list-cinemas"
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   return (
-    <div className={classes.root}>
-      <Tabs
-        orientation="vertical"
-        value={value}
-        onChange={handleChange}
-        className={classes.tabCinema}
-        ref={textInput}
-      >
-        <Tab
-          label={<Image alt={cinemaData[0].label} 
-          src={"/cinemas/logos/lt.png"} className={classes.img} />}
-          disableFocusRipple disableTouchRipple />
-        <Tab
-          label={<Image alt={cinemaData[1].label} 
-          src={"/cinemas/logos/glx.png"} className={classes.img} />}
-          disableFocusRipple disableTouchRipple />
-        
-        <Tab
-          label={<Image alt={cinemaData[2].label} 
-          src={"/cinemas/logos/bhd.png"} className={classes.img} />}
-          disableFocusRipple disableTouchRipple />
-        <Tab
-          label={<Image alt={cinemaData[3].label} 
-          src={"/cinemas/logos/cns.png"} className={classes.img} />}
-          disableFocusRipple disableTouchRipple />
-        <Tab
-          label={<Image alt={cinemaData[4].label}
-            src={"/cinemas/logos/cgv.png"} className={classes.img} />}
-          disableFocusRipple disableTouchRipple />
-        <Tab
-          label={<Image alt={cinemaData[5].label}
-            src={"/cinemas/logos/mgs.png"} className={classes.img} />}
-          disableFocusRipple disableTouchRipple />
-      </Tabs>
-      {
-        cinemaData.map((cinema, index) => (
-          <TabPanel value={value} key={cinema.label} index={index} className={classes.panelCine} style={{ height: panelHeight}}>
-            <Tabs
-              value={value2}
-              onChange={handleChange2}
-              indicatorColor="primary"
-              orientation="vertical"
-              variant="scrollable"
-              scrollButtons="off"
-              className={classes.tabBranch}
-              style={{ height: panelHeight }}
-            >
-              {
-                branchData.map((branch, index) => (
-                  branch.cinemaLabel === cinema.label &&
-                  <Tab label={
-                    <div className={classes.branch} style={{display: 'flex', }}>
-                      <Image src={BranchBHD} alt={branch.label} className={classes.img} />
-                      <div className={classes.branchInfo}>
-                        <p className={classes.branchName}>
-                          <span>{cinema.label}</span> - {branch.name}
-                        </p>
-                        <p className={classes.branchAdd}>{branch.label}</p>
-                        <Link className={classes.link} to='/h'>[Chi tiết]</Link>
+    <div>
+      <div className={classes.root}>
+        <Tabs
+          orientation="vertical"
+          value={value}
+          onChange={handleChange}
+          className={classes.tabCinema}
+          ref={textInput}
+        >
+          <Tab
+            label={<Image alt={cinemaData[0].label}
+              src={"/cinemas/logos/lt.png"} className={classes.img} />}
+            disableFocusRipple disableTouchRipple />
+          <Tab
+            label={<Image alt={cinemaData[1].label}
+              src={"/cinemas/logos/glx.png"} className={classes.img} />}
+            disableFocusRipple disableTouchRipple />
+
+          <Tab
+            label={<Image alt={cinemaData[2].label}
+              src={"/cinemas/logos/bhd.png"} className={classes.img} />}
+            disableFocusRipple disableTouchRipple />
+          <Tab
+            label={<Image alt={cinemaData[3].label}
+              src={"/cinemas/logos/cns.png"} className={classes.img} />}
+            disableFocusRipple disableTouchRipple />
+          <Tab
+            label={<Image alt={cinemaData[4].label}
+              src={"/cinemas/logos/cgv.png"} className={classes.img} />}
+            disableFocusRipple disableTouchRipple />
+          <Tab
+            label={<Image alt={cinemaData[5].label}
+              src={"/cinemas/logos/mgs.png"} className={classes.img} />}
+            disableFocusRipple disableTouchRipple />
+        </Tabs>
+        {
+          cinemaData.map((cinema, index) => (
+            <TabPanel value={value} key={cinema.label} index={index} className={classes.panelCine} style={{ height: panelHeight }}>
+              <Tabs
+                value={value2}
+                onChange={handleChange2}
+                indicatorColor="primary"
+                orientation="vertical"
+                variant="scrollable"
+                scrollButtons="off"
+                className={classes.tabBranch}
+                style={{ height: panelHeight }}
+              >
+                {
+                  branchData.map((branch, index) => (
+                    branch.cinemaLabel === cinema.label &&
+                    <Tab key={index} label={
+                      <div className={classes.branch} style={{ display: 'flex', }}>
+                        <Image src={BranchBHD} alt={branch.label} className={classes.img} isStatic={true} />
+                        <div className={classes.branchInfo}>
+                          <p className={classes.branchName}>
+                            <span>{cinema.label}</span> - {branch.name}
+                          </p>
+                          <p className={classes.branchAdd}>{branch.label}</p>
+                          <Link className={classes.link} to='/h'>[Chi tiết]</Link>
+                        </div>
                       </div>
-                    </div>
-                  } disableFocusRipple disableTouchRipple/>
+                    } disableFocusRipple disableTouchRipple />
+                  ))
+                }
+              </Tabs>
+              {
+                tmpArray.map(index => (
+                  <TabPanel value={value2} index={index - 1} key={index}>hello</TabPanel>
                 ))
               }
-            </Tabs>
-            {
-              tmpArray.map(index => (
-                <TabPanel value={value2} index={index-1}>hello</TabPanel>
-              ))
-            }
-          </TabPanel>
-        ))
-      }
+            </TabPanel>
+          ))
+        }
+      </div>
     </div>
   );
 }
