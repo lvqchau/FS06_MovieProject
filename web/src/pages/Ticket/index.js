@@ -10,17 +10,16 @@ import SeatChoice from './components/SeatChoice';
 const styles = {
   container: {
     height: '100%',
-    overflow: 'hidden',
+    overflowX: 'hidden',
     position: 'relative'
   },
   navbar: {
-    position: 'sticky',
     boxSizing: 'border-box',
     background: 'white',
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
-    height: '5em',
+    height: '10%',
     padding: '0 5% 0 10%',
     alignItems: 'center',
     boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.2)',
@@ -31,7 +30,7 @@ const styles = {
     }
   },
   flexContainer: {
-    height: '100%',
+    height: '90%',
     display: 'flex',
   },
   movie: {

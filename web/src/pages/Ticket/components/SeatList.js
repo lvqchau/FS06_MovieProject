@@ -4,7 +4,8 @@ import Image from '../../../components/Image';
 import { seatList } from '../dummyData';
 const styles = {
   container: {
-    padding: '2em'   
+    padding: '2em',
+    overflow: 'hidden'
   },
   flexContainer: {
     display: 'flex',
@@ -87,7 +88,8 @@ const styles = {
   flexContainer2: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    overflow: 'scroll'
   },
   // seats
   square: {
