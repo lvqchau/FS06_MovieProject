@@ -3,24 +3,32 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Image from '../../components/Image';
 import { Avatar } from '@material-ui/core';
+import TicketBox from './components/TicketBox';
+import SeatList from './components/SeatList';
+import SeatChoice from './components/SeatChoice';
 
 const styles = {
   container: {
-    height: '100vh',
+    height: '100%',
     overflow: 'hidden',
     position: 'relative'
   },
   navbar: {
     position: 'sticky',
     boxSizing: 'border-box',
+    background: 'white',
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
-    height: '4.5em',
+    height: '5em',
     padding: '0 5% 0 10%',
     alignItems: 'center',
     boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.2)',
-    transition: 'width 0.4s ease'
+    transition: 'width 0.4s',
+    width: '100%',
+    '&.active': {
+      width: '70%',
+    }
   },
   flexContainer: {
     height: '100%',
@@ -28,28 +36,38 @@ const styles = {
   },
   movie: {
     transition: 'all 0.4s ease',
+    width: '35%',
     overflow: 'hidden',
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    '&.active': {
+      width: '5%'
+    }
   },
   viewContainer: {
-    transition: 'all 0.4s ease',
-    width: '65%'
+    width: '65%',
+    transition: 'all 0.4s ease'
   },
   seatChoice: {
+    background: 'white',
     position: 'absolute',
     height: '100%',
     width: '30%',
     top: 0,
     right: 0,
     boxShadow: 'none',
+    opacity: 0,
+    visibility: 'hidden',
+    right: '-30%',
     transition: 'visibility 5s, opacity 5s, right 0.4s, box-shadow 1.5s',
     '&.active': {
+      right: 0,
+      opacity: 1,
+      visibility: 'visible',
       boxShadow: '-5px 0px 10px 0px rgba(0,0,0,0.2)',
       transition: 'visibility 0s, opacity 0s, right 0.4s, box-shadow 0s',
     }
   },
-
   image: {
     width: '35vw'
   },
@@ -73,34 +91,17 @@ const styles = {
     '&.active': {
       color: 'orange',
       borderTop: '2px solid orange'
-    },
+    }
   }
 };
 
 const Ticket = (props) => {
   const { classes } = props;
   const [view, setView] = useState(0)
-  const [width, setWidth] = useState({
-    movWidth: "35%",
-    seatRight: "-30%"
-  })
-
-  useEffect(() => {
-    if (view == 0)
-      setWidth({
-        movWidth: "35%",
-        seatRight: "-30%"
-      })
-    else 
-      setWidth({
-        movWidth: "5%",
-        seatRight: "0%"
-      })
-  },[view])
 
   return (
     <div className={classes.container}>
-      <div className={classes.navbar} style={{ width: `calc(100% - 30% - ${width.seatRight})` }}>
+      <div className={view == 0 ? classes.navbar : `${classes.navbar} active`}>
         <div style={{height: '100%'}}>
           <button className={view == 0 ? `${classes.indexButton} active` : classes.indexButton} onClick={() => setView(0)}>
             <span className="indexSpan">01</span>
@@ -117,41 +118,17 @@ const Ticket = (props) => {
         {/* </div> */}
       </div>
       <div className={classes.flexContainer}>
-        <div className={classes.movie} style={{ width: width.movWidth }}>
+        <div className={view == 0 ? classes.movie : `${classes.movie} active`}>
           <Image src="https://s3img.vcdn.vn/123phim/2019/11/chi-chi-em-em-sister-sister-c18-15747394235000.jpg" className={classes.image}/>
         </div>
-        {
-          view == 0 ?
-            <div className={classes.viewContainer}>
-              <div className={classes.ticketBox}>TICKETTTTTTT COUNTTTTTTT</div>  
-            </div>
-            :
-            <div className={classes.viewContainer}>
-              <div className={classes.seatList}>SEATTTTTTT LISTTTTTT</div> 
-            </div>
-        }
-        {
-          view == 0 ?
-            <div className={classes.seatChoice} style={{ right: width.seatRight, opacity: 0, visibility: 'hidden' }}>
-              <Button>Choose ticket</Button>
-              <Button onClick={() => setView(0)}>Choose ticket</Button>
-              <Button onClick={() => setView(0)}>Choose ticket</Button>
-              <Button onClick={() => setView(0)}>Choose ticket</Button>
-              <Button onClick={() => setView(0)}>Choose ticket</Button>
-              {/* <Button onClick={() => setView(0)}>Choose ticket</Button> */}
-              <Button className={classes.order} disabled={true}>Đặt vé</Button>
-            </div>
-            :
-            <div className={`${classes.seatChoice} active`} style={{ right: width.seatRight, opacity: 1, visibility: 'visible' }}>
-              <Button>Choose ticket</Button>
-              <Button onClick={() => setView(0)}>Choose ticket</Button>
-              <Button onClick={() => setView(0)}>Choose ticket</Button>
-              <Button onClick={() => setView(0)}>Choose ticket</Button>
-              <Button onClick={() => setView(0)}>Choose ticket</Button>
-              {/* <Button onClick={() => setView(0)}>Choose ticket</Button> */}
-              <Button className={classes.order} disabled={true}>Đặt vé</Button>
-            </div>
-        }
+        <div className={classes.viewContainer}>
+          {
+            view == 0 ? <TicketBox /> : <SeatList />
+          }
+        </div>
+        <div className={view == 0 ? classes.seatChoice : `${classes.seatChoice} active`}>
+          <SeatChoice />
+        </div>
       </div>
     </div>
   );

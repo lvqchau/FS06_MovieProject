@@ -17,6 +17,7 @@ const styles = theme => ({
   sidebar: {
     width: 'fit-content',
     height: '100vh',
+    background: 'white',
     boxShadow: '1px 0px 10px 0px rgba(0,0,0,0.3)',
     textAlign: 'center',
     zIndex: '9999'
