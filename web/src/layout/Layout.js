@@ -1,14 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Layout = props => {
   return (
-    <>
+    <div style={{
+      position: 'relative',
+      minHeight: '100vh'}}>
       <Header />
-      {props.children}
+      <div style={{ paddingBottom: '15em'}}>
+        {props.children}
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

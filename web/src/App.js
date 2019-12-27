@@ -5,6 +5,9 @@ import Admin from './pages/Admin';
 import Layout from "./layout/Layout";
 import AdminLayout from "./layout/AdminLayout";
 import Ticket from './pages/Ticket';
+import DetailCine from './pages/DetailCine';
+import DetailMovie from './pages/DetailMovie';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
         <Layout path="/">
           <Switch>
             <Route path='/' exact component={Home} />
+            <Route path='/movie/:id' exact component={DetailMovie} />
+            <Route path='/cinema/:id' exact component={DetailCine} />
+            <Route component={PageNotFound} />
           </Switch>
         </Layout>
 

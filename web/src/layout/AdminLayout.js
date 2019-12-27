@@ -1,14 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import { withStyles } from "@material-ui/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Slide from "@material-ui/core/Slide";
-import PropTypes from "prop-types";
-import Toolbar from "@material-ui/core/Toolbar";
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import MenuIcon from "@material-ui/icons/Menu";
-import IconButton from "@material-ui/core/IconButton";
 import Container from "@material-ui/core/Container";
 import Sidebar from "../components/Sidebar";
 
@@ -33,7 +24,7 @@ const styles = theme => ({
 });
 
 const AdminLayout = props => {
-  const { classes } = props;
+  // const { classes } = props;
   // useEffect(() => {
   //   let credentials = localStorage.getItem("userLogin");
   //   if (credentials) {

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Image from '../../components/Image';
 import { Avatar } from '@material-ui/core';
 import TicketBox from './components/TicketBox';
@@ -19,7 +18,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
-    height: '10%',
+    height: '4em',
     padding: '0 5% 0 10%',
     alignItems: 'center',
     boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.2)',
@@ -30,21 +29,37 @@ const styles = {
     }
   },
   flexContainer: {
-    height: '90%',
+    height: 'calc(100% - 4em)',
     display: 'flex',
   },
   movie: {
+    position: 'relative',
     transition: 'all 0.4s ease',
     width: '35%',
+    height: '100%',
+    left: 0,
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'flex-end',
+    '& .overlay': {
+      width: '100%',
+      height: '100%',
+      background: 'transparent',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      transition: 'all 0.4s ease',
+    },
     '&.active': {
-      width: '5%'
+      width: '5%',
+      '& .overlay': {
+        background: 'rgba(0, 0, 0, 0.6)',
+      }
     }
   },
   viewContainer: {
     width: '65%',
+    overflowY: 'scroll',
     transition: 'all 0.4s ease'
   },
   seatChoice: {
@@ -53,7 +68,6 @@ const styles = {
     height: '100%',
     width: '30%',
     top: 0,
-    right: 0,
     boxShadow: 'none',
     opacity: 0,
     visibility: 'hidden',
@@ -68,7 +82,11 @@ const styles = {
     }
   },
   image: {
-    width: '35vw'
+    width: '100%',
+    height: '100%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
   },
   indexButton: {
     background: 'none',
@@ -100,13 +118,13 @@ const Ticket = (props) => {
 
   return (
     <div className={classes.container}>
-      <div className={view == 0 ? classes.navbar : `${classes.navbar} active`}>
+      <div className={view === 0 ? classes.navbar : `${classes.navbar} active`}>
         <div style={{height: '100%'}}>
-          <button className={view == 0 ? `${classes.indexButton} active` : classes.indexButton} onClick={() => setView(0)}>
+          <button className={view === 0 ? `${classes.indexButton} active` : classes.indexButton} onClick={() => setView(0)}>
             <span className="indexSpan">01</span>
             Chọn vé
           </button>
-          <button className={view == 1 ? `${classes.indexButton} active` : classes.indexButton} onClick={() => setView(1)}>
+          <button className={view === 1 ? `${classes.indexButton} active` : classes.indexButton} onClick={() => setView(1)}>
             <span className="indexSpan">02</span>
             Chọn ghế và thanh toán
         </button>
@@ -117,15 +135,18 @@ const Ticket = (props) => {
         {/* </div> */}
       </div>
       <div className={classes.flexContainer}>
-        <div className={view == 0 ? classes.movie : `${classes.movie} active`}>
-          <Image src="https://s3img.vcdn.vn/123phim/2019/11/chi-chi-em-em-sister-sister-c18-15747394235000.jpg" className={classes.image}/>
+        <div className={view === 0 ? classes.movie : `${classes.movie} active`}>
+          <div className="overlay"></div>
+          <div style={{
+            backgroundImage: `url("https://s3img.vcdn.vn/123phim/2019/11/chi-chi-em-em-sister-sister-c18-15747394235000.jpg")`,
+          }} className={classes.image} />
         </div>
         <div className={classes.viewContainer}>
           {
-            view == 0 ? <TicketBox /> : <SeatList />
+            view === 0 ? <TicketBox /> : <SeatList />
           }
         </div>
-        <div className={view == 0 ? classes.seatChoice : `${classes.seatChoice} active`}>
+        <div className={view === 0 ? classes.seatChoice : `${classes.seatChoice} active`}>
           <SeatChoice />
         </div>
       </div>

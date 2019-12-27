@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Image from '../../../components/Image';
 import { seatList } from '../dummyData';
@@ -86,10 +86,10 @@ const styles = {
     display: "flex"
   },
   flexContainer2: {
+    overflow: 'scroll',
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    overflow: 'scroll'
   },
   // seats
   square: {

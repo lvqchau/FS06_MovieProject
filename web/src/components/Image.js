@@ -24,12 +24,12 @@ const Image = props => {
         })
         .catch(error => { });
     }
-  }, []);
+  }, [isStatic, src]);
 
   return (
     <>
       {
-        !img && size == 0 &&
+        !img && size === 0 &&
         <LazyLoadImage
           alt={alt}
           src={PlaceholderS}
@@ -37,7 +37,7 @@ const Image = props => {
         />
       }
       {
-        !img && size != 0 &&
+        !img && size !== 0 &&
         <LazyLoadImage
           alt={alt}
           src={PlaceholderM}

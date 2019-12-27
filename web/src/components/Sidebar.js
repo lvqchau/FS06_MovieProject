@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
-import IconButton from "@material-ui/core/IconButton";
-import Divider from "@material-ui/core/Divider";
 
 import MenuIcon from '@material-ui/icons/Menu';
 import UserIcon from '@material-ui/icons/SupervisedUserCircle';
@@ -10,7 +8,6 @@ import LaptopIcon from '@material-ui/icons/LaptopChromebook';
 import PhotoIcon from '@material-ui/icons/AddAPhoto';
 
 import colors from '../constants/colors';
-import Avatar from './Avatar';
 import { useEffect } from "react";
 
 const styles = theme => ({
@@ -47,7 +44,15 @@ const styles = theme => ({
     padding: 5,
     textDecoration: "none",
     "&:hover": {
-      textDecoration: "none"
+      textDecoration: "none",
+      '&.active': {
+        color: 'green',
+      },
+      '& .textHide': {
+        opacity: 1,
+        visibility: 'visible',
+        width: '200%',
+      }
     },
     position: 'relative',
     '& .textHide': {
@@ -65,16 +70,6 @@ const styles = theme => ({
       width: 0,
       margin: 0,
       transition: 'width 0.4s ease-out'
-    },
-    '&:hover': {
-      '&.active': {
-        color: 'green',
-      },
-      '& .textHide': {
-        opacity: 1,
-        visibility: 'visible',
-        width: '200%',
-      },
     }
   },
   linkFull: {
@@ -142,7 +137,7 @@ const Sidebar = props => {
   const [fullWidth, setFull] = useState(false)
 
   useEffect(() => {
-    switch (props.location.pathname.split('/')[2]) {
+    switch (location.pathname.split('/')[2]) {
       case 'cinema':
         setActive(1);
         break;
@@ -151,7 +146,7 @@ const Sidebar = props => {
         break;
       default: break;
     }
-  },[])
+  },[location.pathname])
 
   return (
     <div className={classes.sidebar}>
