@@ -8,10 +8,9 @@ import PlaceholderM from "../assets/images/null.png";
 const Image = props => {
   const { src, alt, isStatic, size, ...other } = props;
   const [img, setImg] = useState("");
-  
+
   useEffect(() => {
-    if (src[0] !== '/' || src.includes('http') || isStatic)
-      setImg(src)
+    if (src[0] !== "/" || src.includes("http") || isStatic) setImg(src);
     else {
       storage
         .ref()
@@ -22,36 +21,19 @@ const Image = props => {
           setImg(url);
           return url;
         })
-        .catch(error => { });
+        .catch(error => {});
     }
   }, [isStatic, src]);
 
   return (
     <>
-      {
-        !img && size === 0 &&
-        <LazyLoadImage
-          alt={alt}
-          src={PlaceholderS}
-          {...other}
-        />
-      }
-      {
-        !img && size !== 0 &&
-        <LazyLoadImage
-          alt={alt}
-          src={PlaceholderM}
-          {...other}
-        />
-      }
-      {
-        img &&
-        <LazyLoadImage
-          alt={alt}
-          src={img}
-          {...other}
-        />
-      }
+      {!img && size === 0 && (
+        <LazyLoadImage alt={alt} src={PlaceholderS} {...other} />
+      )}
+      {!img && size !== 0 && (
+        <LazyLoadImage alt={alt} src={PlaceholderM} {...other} />
+      )}
+      {img && <LazyLoadImage alt={alt} src={img} {...other} />}
     </>
   );
 };
