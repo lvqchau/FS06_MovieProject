@@ -7,11 +7,15 @@
     "validateUpsert": true
   },
   "properties": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
     "name": {
       "type": "string"
     },
     "release": {
-      "type": "date",
+      "type": "string",
       "required": true
     },
     "genre": {

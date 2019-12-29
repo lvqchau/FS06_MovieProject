@@ -7,6 +7,10 @@
     "validateUpsert": true
   },
   "properties": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
     "branchname": {
       "type": "string",
       "required": true
@@ -16,12 +20,10 @@
       "required": true
     },
     "phone": {
-      "type": "number"
+      "type": "string"
     },
     "room": {
-      "type": [
-        "object"
-      ],
+      "type": ["object"],
       "required": true
     },
     "opentime": {
@@ -29,6 +31,9 @@
       "required": true
     },
     "info": {
+      "type": "string"
+    },
+    "image": {
       "type": "string"
     }
   },
