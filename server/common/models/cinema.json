@@ -49,6 +49,11 @@
       "model": "Movie",
       "foreignKey": "cinemaId",
       "through": "Showtime"
+    },
+    "showtimes": {
+      "type": "hasMany",
+      "model": "Showtime",
+      "foreignKey": "cinemaId"
     }
   },
   "acls": [],

@@ -17,7 +17,7 @@ const Image = props => {
         .child(`images/${src}`)
         .getDownloadURL()
         .then(url => {
-          console.log(url);
+          // console.log(url);
           setImg(url);
           return url;
         })

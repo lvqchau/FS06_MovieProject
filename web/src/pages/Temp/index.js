@@ -128,8 +128,6 @@ const Home2 = props => {
 
   const [listcinema, setListCinema] = useState({ isLoading: true, data: [] });
   const [cinema, setCinema] = useState({ isLoading: true, data: [] });
-  const [isLoading, setLoading] = useState(true);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
